@@ -1,18 +1,21 @@
 const express = require("express");
 const morgan = require('morgan');
 const mongoose = require("mongoose");
-const {getPollController, postPollController} = require('./controller/pollController');
+const {getPollController, postPollController, getAllPollsController, getPollDetailsController, postPublicVoteController} = require('./controller/pollController');
 
 const app = express();
 
 app.set('view engine', 'ejs');
 
 app.use(morgan('dev'));
-// app.use(express.json());
+app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.get('/create', getPollController);
 app.post('/create', postPollController);
+app.get('/myPolls', getAllPollsController);
+app.get('/pollResult/:id', getPollDetailsController)
+app.post('/vote/:id', postPublicVoteController);
 
 app.get('/', (req, res) => {
     res.render('home');
