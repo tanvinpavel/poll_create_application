@@ -77,9 +77,11 @@ pollController.postPublicVoteController = async(req, res) => {
         //increase total vote
         let totalVote = pollDetails.totalVote + 1;
 
-        await polls.updateOne({_id: req.params.id}, {$set: {
-            options, totalVote
-        }})
+        await polls.updateOne({_id: req.params.id}, {
+            $set: {
+                options, totalVote
+            }
+        })
 
         res.redirect(`/pollResult/${req.params.id}`);
     }catch(e){

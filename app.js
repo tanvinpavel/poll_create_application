@@ -11,6 +11,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+//routes
 app.get('/create', getPollController);
 app.post('/create', postPollController);
 app.get('/myPolls', getAllPollsController);
